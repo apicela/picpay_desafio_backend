@@ -4,9 +4,15 @@
   <br><img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=red&style=for-the-badge"/>
 </p>
 
-O desafio pode ser visualizado em:
+O desafio proposto pode ser visualizado em:
 
 https://github.com/PicPay/picpay-desafio-backend
 
+### 👨‍💻 Status da aplicação
 
-<< Ainda está em desenvolvimento, portanto código nao está completo e documentação também não >>
+:x: Documentação da API<br>
+:x: Documentação da Aplicação <br>
+⏳ API do CRUD ( Necessito tratar as exceptions e realizar alguns refatoramentos ) <br>
+:x: Conteinerização <br>
+:x: Testes <br>
+
