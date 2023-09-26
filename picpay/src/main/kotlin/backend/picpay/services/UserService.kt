@@ -1,6 +1,8 @@
 package backend.picpay.services
 
 import backend.picpay.dtos.UserDTO
+import backend.picpay.exceptions.InsufficientBalance
+import backend.picpay.exceptions.UnauthorizedTransfer
 import backend.picpay.models.AccountType
 import backend.picpay.models.User
 import backend.picpay.repositories.UserRepository
@@ -15,12 +17,14 @@ class UserService(
     val userRepository: UserRepository
 ) {
 
-    fun canTransfer(sender: User): Boolean {
-        return sender.accountType == AccountType.COMMUN
+    fun canTransfer(sender: User) {
+        if (sender.accountType != AccountType.COMMUN) {
+            throw UnauthorizedTransfer("Contas do tipo ${sender.accountType} não podem enviar transferências!")
+        }
     }
 
-    fun hasBalance(sender: User, amount: BigDecimal): Boolean {
-        return sender.balance > amount
+    fun hasBalance(sender: User, amount: BigDecimal){
+        if(sender.balance < amount) throw InsufficientBalance("Saldo insuficiente para realizar a transferência de R$$amount!")
     }
 
     fun findById(id: Long): User? {

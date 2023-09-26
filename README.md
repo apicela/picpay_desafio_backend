@@ -12,7 +12,8 @@ https://github.com/PicPay/picpay-desafio-backend
 
 :x: Documentação da API<br>
 :x: Documentação da Aplicação <br>
-⏳ API do CRUD ( Necessito tratar as exceptions e realizar alguns refatoramentos ) <br>
+⏳ API do CRUD ( Está funcionando, porém pretendo realizar uns ajustes ) <br>
 :x: Conteinerização <br>
 :x: Testes <br>
+
 
