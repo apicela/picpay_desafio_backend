@@ -1,6 +1,8 @@
 package backend.picpay.models
 
 //import lombok.ToString
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 import java.math.BigDecimal

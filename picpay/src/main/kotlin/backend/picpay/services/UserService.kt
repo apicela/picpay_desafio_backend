@@ -3,13 +3,18 @@ package backend.picpay.services
 import backend.picpay.dtos.UserDTO
 import backend.picpay.exceptions.InsufficientBalance
 import backend.picpay.exceptions.UnauthorizedTransfer
+import backend.picpay.exceptions.UserNotFound
 import backend.picpay.models.AccountType
+import backend.picpay.models.Transfer
 import backend.picpay.models.User
+import backend.picpay.projections.TransferProjectionImpl
+import backend.picpay.projections.UserProjectionImpl
 import backend.picpay.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
+import java.time.LocalDateTime
 
 @Service
 class UserService(
@@ -18,31 +23,55 @@ class UserService(
 ) {
 
     fun canTransfer(sender: User) {
-        if (sender.accountType != AccountType.COMMUN) {
+        if (sender.accountType != AccountType.COMMON) {
             throw UnauthorizedTransfer("Contas do tipo ${sender.accountType} não podem enviar transferências!")
         }
     }
 
-    fun hasBalance(sender: User, amount: BigDecimal){
-        if(sender.balance < amount) throw InsufficientBalance("Saldo insuficiente para realizar a transferência de R$$amount!")
+    fun hasBalance(sender: User, amount: BigDecimal) {
+        if (sender.balance < amount) throw InsufficientBalance("Saldo insuficiente para realizar a transferência de R$$amount!")
+    }
+
+    fun findUserProjectionImplById(id: Long): UserProjectionImpl? {
+        val user = userRepository.findByIdOrNull(id)
+            ?: throw UserNotFound("O usuário $id não existe! Verifique se o campo está preenchido corretamente.")
+
+        return UserProjectionImpl(
+            user.fullName,
+            user.document,
+            user.email,
+            user.receivedTransfers?.map{ convertTransferToProjection(it) }?.toMutableList(),
+            user.sendedTransfers?.map { convertTransferToProjection(it) }?.toMutableList(),
+            user.balance,
+            user.accountType
+        )
     }
 
     fun findById(id: Long): User? {
         return userRepository.findByIdOrNull(id)
+            ?: throw UserNotFound("O usuário $id não existe! Verifique se o campo está preenchido corretamente.")
     }
 
-    fun createUser(userDTO: UserDTO): User {
+    fun createUser(userDTO: UserDTO): String {
         val user = User(userDTO)
-        return userRepository.save(user)
+        userRepository.save(user)
+        return "O usuário de nome:${userDTO.fullName} e documento: ${userDTO.document} foi criado!"
     }
 
-    fun createUser(user: User): User {
-        return userRepository.save(user)
+
+    fun listAllUsers(): List<UserProjectionImpl> {
+        val users = userRepository.findAll()
+
+        return users.map { user ->
+            UserProjectionImpl(
+                user.fullName, user.document, user.email,
+                user.receivedTransfers?.map{ convertTransferToProjection(it) }?.toMutableList(),
+                user.sendedTransfers?.map{ convertTransferToProjection(it) }?.toMutableList()
+                , user.balance, user.accountType
+            )
+        }
     }
 
-    fun listAllUsers(): List<User> {
-        return userRepository.findAll()
-    }
 
     val user1: User = User(
         null,
@@ -53,7 +82,7 @@ class UserService(
         null,
         null,
         BigDecimal.valueOf(0),
-        AccountType.COMMUN
+        AccountType.COMMON
     )
     val user2: User = User(
         null,
@@ -75,13 +104,24 @@ class UserService(
         null,
         null,
         BigDecimal.valueOf(4_444),
-        AccountType.COMMUN
+        AccountType.COMMON
     )
+
+    fun convertTransferToProjection(transfer: Transfer): TransferProjectionImpl {
+        return TransferProjectionImpl(
+            transfer.id!!,
+            transfer.sender.id!!,
+            transfer.sender.fullName,
+            transfer.receiver.id!!,
+            transfer.receiver.fullName,
+            transfer.amount,
+            transfer.date
+        )
+    }
 
     fun saveUser() {
         userRepository.save(user1)
         userRepository.save(user2)
         userRepository.save(user3)
-
     }
 }

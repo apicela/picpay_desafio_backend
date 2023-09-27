@@ -2,6 +2,8 @@ package backend.picpay.models
 
 import backend.picpay.dtos.UserDTO
 import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import jakarta.persistence.*
 import java.math.BigDecimal
 
@@ -26,8 +28,6 @@ data class User(
     var balance: BigDecimal,
     @Enumerated(EnumType.STRING)
     val accountType: AccountType
-
-
 ) {
     constructor(userDTO: UserDTO) : this(
         fullName = userDTO.fullName,
@@ -37,5 +37,12 @@ data class User(
         balance = userDTO.balance,
         accountType = userDTO.accountType
     )
+
+    override fun toString(): String {
+        return "User(id=$id, fullName='$fullName'," +
+                " document='$document', email='$email', password='$password', " +
+                "receivedTransfers=$receivedTransfers, sendedTransfers=$sendedTransfers," +
+                " balance=$balance, accountType=$accountType)"
+    }
 
 }

@@ -1,4 +1,3 @@
 package backend.picpay.exceptions
 
-class InsufficientBalance(msg : String) : Exception(msg) {
-}
+class InsufficientBalance(msg: String) : Exception(msg)

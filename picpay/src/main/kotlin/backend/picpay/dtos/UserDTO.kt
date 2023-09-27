@@ -18,6 +18,7 @@ class UserDTO(
     @NotNull
     val accountType: AccountType
 ) {
+
     companion object {
         fun getDefault(): UserDTO {
             return UserDTO(
@@ -26,7 +27,7 @@ class UserDTO(
                 email = "string",
                 password = "string",
                 balance = BigDecimal.ZERO,
-                accountType = AccountType.COMMUN
+                accountType = AccountType.COMMON
             )
         }
     }
