@@ -18,3 +18,30 @@ https://github.com/PicPay/picpay-desafio-backend
 ⏳ Testes unitários/integração <br>
 
 
+### 📋 Pré-requisitos
+
+* Java 17+ <br>
+* Gradle 6.4+<br>
+
+## ⚙️ Como configurar para teste da aplicação
+### Método 1 - Utilizando Docker (recomendado) - não requer Java e Gradle instalados em sua máquina:
+1. Clone este repositório: ``` git clone https://github.com/apicela/picpay_desafio_backend.git ```
+2. Abra o terminal no diretório do arquivo.
+3. Execute o seguinte comando no terminal: ```docker build -t picpay_apicela . && docker run -p 8080:8080 picpay_apicela```
+4. Acesse a interface pelo navegador: http://localhost:8080/swagger-ui/index.html
+   <br>
+### Método 2 - Utilizando Java 17+
+1. Clone este repositório: ``` git clone https://github.com/apicela/picpay_desafio_backend.git ```
+2. Abra o terminal no diretório do arquivo.
+3. Execute o seguinte comando no terminal: ```./gradlew build && ./gradlew bootRun```
+4. Acesse a interface pelo navegador: http://localhost:8080/swagger-ui/index.html
+   <br>
+
+### 🛠️ Ferramentas utilizadas
+
+* [SpringBoot](https://spring.io/) - O framework web utilizado
+* [Docker](https://www.docker.com/) - Utilizado para build, teste e deploy da aplicação
+* [SwaggerUI](https://swagger.io/tools/swagger-ui/) - Interface utilizada para documentação da API
+* [Gradle](https://gradle.org/) - Gerenciador de Dependências
+* [Banco de dados H2](https://www.h2database.com/html/main.html) - Utilizado para simular um banco de dados
+

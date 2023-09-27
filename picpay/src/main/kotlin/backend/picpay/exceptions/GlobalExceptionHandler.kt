@@ -37,13 +37,34 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleArgumentInvalid(ex: MethodArgumentNotValidException): ResponseEntity<Any> {
+        var lastWord : String? = null
         val validationErrors = ex.allErrors.forEach { err ->
             val s : String = err.defaultMessage.toString() // captura a mensagem do erro
-           val lastWord = StringRegex.lastWord.find(s)?.value
+            lastWord = StringRegex.lastWord.find(s)?.value
         }
-
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("")
+        var messageResponse : String = "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados! \n \n"
+        if(ex.objectName == "userDTO") {
+            messageResponse = "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados! \n" +
+                    "Os dados fornecidos não cumprem os critérios de:\n" +
+                    "{\n" +
+                    "  \"fullName\": \"Nome completo\",\n" +
+                    "  \"document\": \"Documento\",\n" +
+                    "  \"email\": \"nome@email.com\",\n" +
+                    "  \"password\": \"senha\",\n" +
+                    "  \"balance\": [VALOR VÁLIDO],\n" +
+                    "  \"accountType\": \"COMMON/VENDOR\"\n" +
+                    "}"
+        }
+        else if(ex.objectName == "transferDTO"){
+             messageResponse = "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados!\n \n" +
+                     "Os dados fornecidos não cumprem os critérios de:\n" +
+                    "{\n" +
+                    "  \"sender\": [ID DO PAGANTE],\n" +
+                    "  \"receiver\": [ID DO BENEFICIADO],\n" +
+                    "  \"amount\": [VALOR VÁLIDO]\n" +
+                    "}"
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse)
     }
 
     @ExceptionHandler(HttpMessageNotReadableException::class)
