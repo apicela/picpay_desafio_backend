@@ -2,6 +2,7 @@ package backend.picpay.models
 
 //import lombok.ToString
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
@@ -13,14 +14,8 @@ data class Transfer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    @ManyToOne
-    @JoinColumn(name = "sender_id")
-    @JsonManagedReference
-    val sender: User,
-    @ManyToOne
-    @JoinColumn(name = "receiver_id")
-    @JsonManagedReference
-    val receiver: User,
+    val sender : Long,
+    val receiver : Long,
     val amount: BigDecimal,
     val date: LocalDateTime
 ) {

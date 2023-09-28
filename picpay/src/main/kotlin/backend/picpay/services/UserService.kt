@@ -40,8 +40,6 @@ class UserService(
             user.fullName,
             user.document,
             user.email,
-            user.receivedTransfers?.map{ convertTransferToProjection(it) }?.toMutableList(),
-            user.sendedTransfers?.map { convertTransferToProjection(it) }?.toMutableList(),
             user.balance,
             user.accountType
         )
@@ -65,63 +63,10 @@ class UserService(
         return users.map { user ->
             UserProjectionImpl(
                 user.fullName, user.document, user.email,
-                user.receivedTransfers?.map{ convertTransferToProjection(it) }?.toMutableList(),
-                user.sendedTransfers?.map{ convertTransferToProjection(it) }?.toMutableList()
-                , user.balance, user.accountType
+                user.balance, user.accountType
             )
         }
     }
 
 
-    val user1: User = User(
-        null,
-        "Jamil Souza",
-        "123456789",
-        "trab.jamilsouza@gmail.com",
-        "123",
-        null,
-        null,
-        BigDecimal.valueOf(0),
-        AccountType.COMMON
-    )
-    val user2: User = User(
-        null,
-        "Lobo de Wall Street",
-        "987654321",
-        "freemoney@lobowallstreet.com",
-        "000",
-        null,
-        null,
-        BigDecimal.valueOf(1_000_000),
-        AccountType.VENDOR
-    )
-    val user3: User = User(
-        null,
-        "Jhin Carry",
-        "444444444",
-        "jh1n4444@jhin.com",
-        "4444",
-        null,
-        null,
-        BigDecimal.valueOf(4_444),
-        AccountType.COMMON
-    )
-
-    fun convertTransferToProjection(transfer: Transfer): TransferProjectionImpl {
-        return TransferProjectionImpl(
-            transfer.id!!,
-            transfer.sender.id!!,
-            transfer.sender.fullName,
-            transfer.receiver.id!!,
-            transfer.receiver.fullName,
-            transfer.amount,
-            transfer.date
-        )
-    }
-
-    fun saveUser() {
-        userRepository.save(user1)
-        userRepository.save(user2)
-        userRepository.save(user3)
-    }
 }

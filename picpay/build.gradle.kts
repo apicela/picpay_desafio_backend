@@ -30,13 +30,15 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    compileOnly("org.projectlombok:lombok")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
     implementation("io.swagger.core.v3:swagger-annotations:2.2.8")
     implementation("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
-    annotationProcessor("org.projectlombok:lombok")
+    compileOnly ("org.projectlombok:lombok:1.18.30")
+    annotationProcessor ("org.projectlombok:lombok:1.18.30")
+    testCompileOnly ("org.projectlombok:lombok:1.18.30")
+    testAnnotationProcessor ("org.projectlombok:lombok:1.18.30")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -1,6 +1,7 @@
 package backend.picpay.controllers
 
 import backend.picpay.dtos.TransferDTO
+import backend.picpay.models.Transfer
 import backend.picpay.projections.TransferProjectionImpl
 import backend.picpay.services.TransferService
 import io.swagger.v3.oas.annotations.Operation

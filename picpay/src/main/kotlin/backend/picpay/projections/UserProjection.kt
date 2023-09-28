@@ -9,8 +9,6 @@ interface UserProjection {
     val fullName: String
     val document: String
     val email: String
-    var receivedTransfers: MutableList<TransferProjectionImpl>?
-    var sendedTransfers: MutableList<TransferProjectionImpl>?
     var balance: BigDecimal
     val accountType: AccountType
 

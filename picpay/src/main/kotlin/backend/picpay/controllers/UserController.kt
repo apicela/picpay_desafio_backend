@@ -1,6 +1,7 @@
 package backend.picpay.controllers
 
 import backend.picpay.dtos.UserDTO
+import backend.picpay.projections.UserProjectionImpl
 import backend.picpay.services.UserService
 import io.swagger.v3.oas.annotations.Operation
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +24,7 @@ class UserController(
 
     @GetMapping
     @Operation(summary = "Listar todos usuários", description = "API que retorna todos usuários.")
-    fun listAllUsers(): ResponseEntity<List<Any>> {
+    fun listAllUsers(): ResponseEntity<List<UserProjectionImpl>> {
         return ResponseEntity.status(HttpStatus.OK).body(userService.listAllUsers())
     }
 

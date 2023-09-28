@@ -19,12 +19,6 @@ data class User(
     @Column(unique = true)
     val email: String,
     var password: String,
-    @OneToMany(mappedBy = "receiver")
-    @JsonBackReference
-    var receivedTransfers: MutableList<Transfer>? = null,
-    @OneToMany(mappedBy = "sender")
-    @JsonBackReference
-    var sendedTransfers: MutableList<Transfer>? = null,
     var balance: BigDecimal,
     @Enumerated(EnumType.STRING)
     val accountType: AccountType
@@ -37,12 +31,4 @@ data class User(
         balance = userDTO.balance,
         accountType = userDTO.accountType
     )
-
-    override fun toString(): String {
-        return "User(id=$id, fullName='$fullName'," +
-                " document='$document', email='$email', password='$password', " +
-                "receivedTransfers=$receivedTransfers, sendedTransfers=$sendedTransfers," +
-                " balance=$balance, accountType=$accountType)"
-    }
-
 }
