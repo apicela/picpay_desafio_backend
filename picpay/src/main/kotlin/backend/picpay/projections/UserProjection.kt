@@ -1,7 +1,6 @@
 package backend.picpay.projections
 
 import backend.picpay.models.AccountType
-import backend.picpay.models.Transfer
 import java.math.BigDecimal
 
 

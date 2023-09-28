@@ -14,5 +14,4 @@ class TransferProjectionImpl(
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     override val date: LocalDateTime
 
-) : TransferProjection {
-}
+) : TransferProjection

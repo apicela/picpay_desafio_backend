@@ -5,16 +5,13 @@ import backend.picpay.exceptions.InsufficientBalance
 import backend.picpay.exceptions.UnauthorizedTransfer
 import backend.picpay.exceptions.UserNotFound
 import backend.picpay.models.AccountType
-import backend.picpay.models.Transfer
 import backend.picpay.models.User
-import backend.picpay.projections.TransferProjectionImpl
 import backend.picpay.projections.UserProjectionImpl
 import backend.picpay.repositories.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
-import java.time.LocalDateTime
 
 @Service
 class UserService(

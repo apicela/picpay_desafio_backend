@@ -15,8 +15,10 @@ class SwaggerConfig {
         return OpenAPI().components(Components())
             .info(
                 Info().title("API PICPAY").version("1.0.0")
-                    .description("REST API documentation - \n" +
-                            "https://github.com/apicela")
+                    .description(
+                        "REST API documentation - \n" +
+                                "https://github.com/apicela"
+                    )
             )
     }
 }

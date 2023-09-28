@@ -1,9 +1,6 @@
 package backend.picpay.projections
 
 import backend.picpay.models.AccountType
-import backend.picpay.models.Transfer
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.math.BigDecimal
 
 class UserProjectionImpl(
@@ -12,6 +9,4 @@ class UserProjectionImpl(
     override val email: String,
     override var balance: BigDecimal,
     override val accountType: AccountType
-) : UserProjection{
-
-}
+) : UserProjection

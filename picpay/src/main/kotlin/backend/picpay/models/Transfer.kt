@@ -1,11 +1,10 @@
 package backend.picpay.models
 
 //import lombok.ToString
-import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonManagedReference
-import jakarta.persistence.*
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -14,11 +13,9 @@ data class Transfer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val sender : Long,
-    val receiver : Long,
+    val sender: Long,
+    val receiver: Long,
     val amount: BigDecimal,
     val date: LocalDateTime
-) {
-
-}
+)
 
