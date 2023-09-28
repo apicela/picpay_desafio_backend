@@ -70,8 +70,6 @@ class TransferService(
         transferRepository.save(transfer1)
         transferRepository.save(transfer2)
         transferRepository.save(transfer3)
-
-//        session.close()
     }
 
 
@@ -116,5 +114,18 @@ class TransferService(
 
     }
 
+    fun findTransfersByUserId(userId : Long) : MutableList<TransferProjectionImpl>{
+        println("...........................................")
+        println(transferRepository.findTransfersByUserId(userId).size)
+        return transferRepository.findTransfersByUserId(userId).map{
+            val senderName : String = userRepository.findById(it.sender).get().fullName
+            val receiverName : String = userRepository.findById(it.receiver).get().fullName
+            TransferProjectionImpl(
+                it.id!!, it.sender, senderName, it.receiver,
+                receiverName, it.amount, it.date
+            )
+        }.toMutableList()
 
+
+}
 }

@@ -24,7 +24,7 @@ class TransferController(
         return ResponseEntity.status(HttpStatus.CREATED).body(transferService.createTransfer(transferDTO))
     }
 
-    @GetMapping("/allTransactions")
+    @GetMapping
     @Operation(
         summary = "Listar todas transferências",
         description = "API que retorna todas transferência entre usuários."
@@ -36,6 +36,11 @@ class TransferController(
     @GetMapping("/{id}")
     fun listAllTransfers(@PathVariable(value = "id") id: Long): ResponseEntity<TransferProjectionImpl> {
         return ResponseEntity.status(HttpStatus.OK).body(transferService.findById(id))
+    }
+
+    @GetMapping("/user/{userId}")
+    fun findTransfersByUserId(@PathVariable(value = "userId") userId: Long) : ResponseEntity<List<TransferProjectionImpl>>{
+        return ResponseEntity.status(HttpStatus.OK).body(transferService.findTransfersByUserId(userId))
     }
 
 }

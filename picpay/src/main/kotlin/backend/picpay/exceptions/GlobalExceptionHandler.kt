@@ -52,7 +52,7 @@ class GlobalExceptionHandler {
                     "  \"email\": \"nome@email.com\",\n" +
                     "  \"password\": \"senha\",\n" +
                     "  \"balance\": [VALOR VÁLIDO],\n" +
-                    "  \"accountType\": \"COMMON/VENDOR\"\n" +
+                    "  \"accountType\": \"COMMON\" ou \"VENDOR\"\n" +
                     "}"
         }
         else if(ex.objectName == "transferDTO"){
@@ -63,7 +63,8 @@ class GlobalExceptionHandler {
                     "  \"receiver\": [ID DO BENEFICIADO],\n" +
                     "  \"amount\": [VALOR VÁLIDO]\n" +
                     "}"
-        }
+        } else if(ex.objectName == "accountType"){
+            messageResponse = "Favor preencher o campo AccountType com COMMON ou VENDOR"}
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse)
     }
 
