@@ -4,7 +4,8 @@
   <img src="https://img.shields.io/badge/Kotlin-000?&style=for-the-badge&logo=kotlin&logoColor=yellow"/>
   <img src="https://img.shields.io/badge/Spring-000?style=for-the-badge&logo=spring&logoColor=green"/>
     <img src="https://img.shields.io/badge/Docker-000?style=for-the-badge&logo=docker&logoColor=white">  
-<br><img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=red&style=for-the-badge"/>
+<br><img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge"/>
+
 </p><br>
 
 
@@ -54,13 +55,16 @@ API Rest utilizando Kotlin + SpringBoot, com documentação da API realizada na 
 * [SwaggerUI](https://swagger.io/tools/swagger-ui/) - Interface utilizada para documentação da API
 * [Gradle](https://gradle.org/) - Gerenciador de Dependências
 * [Banco de dados H2](https://www.h2database.com/html/main.html) - Utilizado para simular um banco de dados
-* 
-## Interface da aplicação
+
+## 📝 Interface da aplicação
+<br>
+
 ![image](https://github.com/apicela/picpay_desafio_backend/assets/105384228/f8db87ad-ae8f-46f2-9f3a-7497820ce8a8)
+<br>
 
-<br><br>
+## 💻 Utilização da API na prática
+<br>
 
-## Utilização da API na prática
 ![image](https://github.com/apicela/picpay_desafio_backend/assets/105384228/234c48d1-49ff-4f0e-86d7-7f79f51c71c0)
 
 <br>
