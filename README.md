@@ -41,7 +41,7 @@ API Rest utilizando Kotlin + SpringBoot, com documentação da API realizada na 
 ✔️  Documentação da Aplicação <br>
 ✔️ API do CRUD<br>
 ✔️ Conteinerização <br>
-⏳ Testes unitários/integração <br>
+✔️ Testes unitários/integração <br>
 
 
 ### 📋 Pré-requisitos
