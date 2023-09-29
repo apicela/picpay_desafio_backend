@@ -68,5 +68,3 @@ API Rest utilizando Kotlin + SpringBoot, com documentação da API realizada na 
 ![image](https://github.com/apicela/picpay_desafio_backend/assets/105384228/234c48d1-49ff-4f0e-86d7-7f79f51c71c0)
 
 <br>
-
-
