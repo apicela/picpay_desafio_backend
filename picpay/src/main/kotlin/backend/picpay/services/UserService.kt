@@ -47,10 +47,9 @@ class UserService(
             ?: throw UserNotFound("O usuário $id não existe! Verifique se o campo está preenchido corretamente.")
     }
 
-    fun createUser(userDTO: UserDTO): String {
+    fun createUser(userDTO: UserDTO): User {
         val user = User(userDTO)
-        userRepository.save(user)
-        return "O usuário de nome:${userDTO.fullName} e documento: ${userDTO.document} foi criado!"
+        return userRepository.save(user)
     }
 
 

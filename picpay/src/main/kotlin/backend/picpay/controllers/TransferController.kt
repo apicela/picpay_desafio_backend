@@ -4,6 +4,7 @@ import backend.picpay.dtos.TransferDTO
 import backend.picpay.projections.TransferProjectionImpl
 import backend.picpay.services.TransferService
 import io.swagger.v3.oas.annotations.Operation
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -14,12 +15,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/transactions")
 class TransferController(
     @Autowired
-    val transferService: TransferService
+    val transferService: TransferService,
 ) {
-
     @PostMapping
     @Operation(summary = "Criar transferência", description = "API que realiza transferência entre usuários.")
-    fun createTransfer(transferDTO: TransferDTO): ResponseEntity<Any> {
+    fun createTransfer(@RequestBody @Valid transferDTO: TransferDTO): ResponseEntity<Any> {
         return ResponseEntity.status(HttpStatus.CREATED).body(transferService.createTransfer(transferDTO))
     }
 
@@ -49,5 +49,7 @@ class TransferController(
     fun findTransfersByUserId(@PathVariable(value = "userId") userId: Long): ResponseEntity<List<TransferProjectionImpl>> {
         return ResponseEntity.status(HttpStatus.OK).body(transferService.findTransfersByUserId(userId))
     }
-
+    companion object {
+        const val ENDPOINT = "/transactions"
+    }
 }

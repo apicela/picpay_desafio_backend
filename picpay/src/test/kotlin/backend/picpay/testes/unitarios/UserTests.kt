@@ -1,6 +1,9 @@
 package backend.picpay.testes.unitarios
 
+import backend.picpay.dtos.UserDTO
+import backend.picpay.models.AccountType
 import backend.picpay.repositories.UserRepository
+import backend.picpay.services.UserService
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.extension.ExtendWith
@@ -8,22 +11,49 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.math.BigDecimal
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension::class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-@Log4j2
 class TransferTest {
 
     @Autowired
     private lateinit var userRepository: UserRepository
 
+    @Autowired
+    private lateinit var userService: UserService
+
     @Test
     @Order(0)
+    @DisplayName("teste service create")
+    fun testCreateService() {
+        val userDTO = UserDTO("Mekon Trata",
+            "123987456",
+            "tech@recruiter.com",
+            "3213421",
+            BigDecimal.TEN,
+            AccountType.VENDOR)
+
+        userService.createUser(userDTO)
+        val lastUser = userRepository.findAll().last()
+        Assertions.assertEquals(userDTO.email, lastUser.email)
+        Assertions.assertEquals(userDTO.document, lastUser.document)
+    }
+
+    @Test
+    @Order(1)
     @DisplayName("teste service findById")
     fun testFindByIdService() {
-        println(userRepository.findAll())
+        val user1 = userService.findById(1)
+        val user2 = userRepository.findById(1).get()
+        Assertions.assertEquals(user1,user2)
+    }
+
+    // testar chamadas HTTP
+    fun postUser(){
+
     }
 }
 

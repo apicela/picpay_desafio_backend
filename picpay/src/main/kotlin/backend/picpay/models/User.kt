@@ -1,6 +1,7 @@
 package backend.picpay.models
 
 import backend.picpay.dtos.UserDTO
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import java.math.BigDecimal
 
@@ -15,6 +16,7 @@ data class User(
     val document: String,
     @Column(unique = true)
     val email: String,
+    @JsonIgnore
     var password: String,
     var balance: BigDecimal,
     @Enumerated(EnumType.STRING)

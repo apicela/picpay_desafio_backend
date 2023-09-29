@@ -1,17 +1,18 @@
 package backend.picpay.dtos
 
 import backend.picpay.models.AccountType
+import jakarta.validation.constraints.NotBlank
 import org.jetbrains.annotations.NotNull
 import java.math.BigDecimal
 
 class UserDTO(
-    @NotNull
+    @NotBlank
     val fullName: String,
-    @NotNull
+    @NotBlank
     val document: String,
-    @NotNull
+    @NotBlank
     val email: String,
-    @NotNull
+    @NotBlank
     var password: String,
     @NotNull
     var balance: BigDecimal,
@@ -19,16 +20,4 @@ class UserDTO(
     val accountType: AccountType
 ) {
 
-    companion object {
-        fun getDefault(): UserDTO {
-            return UserDTO(
-                fullName = "412421",
-                document = "string",
-                email = "string",
-                password = "string",
-                balance = BigDecimal.ZERO,
-                accountType = AccountType.COMMON
-            )
-        }
-    }
 }
