@@ -23,7 +23,7 @@ class TransferService(
     val userService: UserService
 ) {
     @Transactional
-    fun createTransfer(transferDTO: TransferDTO): String? {
+    fun createTransfer(transferDTO: TransferDTO): Transfer {
         val sender = checkNotNull(userService.findById(transferDTO.sender))
         { throw UserNotFound("O usuário ${transferDTO.sender} não existe! Verifique se o campo está preenchido corretamente.") }
         val receiver = checkNotNull(userService.findById(transferDTO.receiver))
@@ -34,10 +34,11 @@ class TransferService(
         receiver.balance = receiver.balance.plus(transferDTO.amount)
         val transfer: Transfer =
             Transfer(null, transferDTO.sender, transferDTO.receiver, transferDTO.amount, LocalDateTime.now())
-        transferRepository.save(transfer)
-        return "A transferência de R$${transfer.amount} foi realizada com sucesso!\n" +
+        val returned = transferRepository.save(transfer)
+        val personalizadoReturn = "A transferência de R$${transfer.amount} foi realizada com sucesso!\n" +
                 "Pagador: ${(sender.fullName)}\n" +
                 "Favorecido: ${(receiver).fullName}"
+        return returned
 
     }
 

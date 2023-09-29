@@ -17,9 +17,10 @@ import java.time.LocalDateTime
 import org.hibernate.collection.spi.PersistentCollection
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.stereotype.Component
 
 
-@SpringBootTest
+@Component
 class PicpayApplicationTests {
 
     @Autowired

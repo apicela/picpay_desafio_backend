@@ -44,31 +44,31 @@ class GlobalExceptionHandler {
             val s: String = err.defaultMessage.toString() // captura a mensagem do erro
             lastWord = StringRegex.lastWord.find(s)?.value
         }
-//        var messageResponse: String =
-//            "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados! \n \n"
-//        if (ex.objectName == "userDTO") {
-//            messageResponse = "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados! \n" +
-//                    "Os dados fornecidos não cumprem os critérios de:\n" +
-//                    "{\n" +
-//                    "  \"fullName\": \"Nome completo\",\n" +
-//                    "  \"document\": \"Documento\",\n" +
-//                    "  \"email\": \"nome@email.com\",\n" +
-//                    "  \"password\": \"senha\",\n" +
-//                    "  \"balance\": [VALOR VÁLIDO],\n" +
-//                    "  \"accountType\": \"COMMON\" ou \"VENDOR\"\n" +
-//                    "}"
-//        } else if (ex.objectName == "transferDTO") {
-//            messageResponse = "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados!\n \n" +
-//                    "Os dados fornecidos não cumprem os critérios de:\n" +
-//                    "{\n" +
-//                    "  \"sender\": [ID DO PAGANTE],\n" +
-//                    "  \"receiver\": [ID DO BENEFICIADO],\n" +
-//                    "  \"amount\": [VALOR VÁLIDO]\n" +
-//                    "}"
-//        } else if (ex.objectName == "accountType") {
-//            messageResponse = "Favor preencher o campo AccountType com COMMON ou VENDOR"
-//        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.message)
+        var messageResponse: String =
+            "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados! \n \n"
+        if (ex.objectName == "userDTO") {
+            messageResponse = "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados! \n" +
+                    "Os dados fornecidos não cumprem os critérios de:\n" +
+                    "{\n" +
+                    "  \"fullName\": \"Nome completo\",\n" +
+                    "  \"document\": \"Documento\",\n" +
+                    "  \"email\": \"nome@email.com\",\n" +
+                    "  \"password\": \"senha\",\n" +
+                    "  \"balance\": [VALOR VÁLIDO],\n" +
+                    "  \"accountType\": \"COMMON\" ou \"VENDOR\"\n" +
+                    "}"
+        } else if (ex.objectName == "transferDTO") {
+            messageResponse = "Esta ação requer o preenchimento do campo $lastWord, favor revisar os dados!\n \n" +
+                    "Os dados fornecidos não cumprem os critérios de:\n" +
+                    "{\n" +
+                    "  \"sender\": [ID DO PAGANTE],\n" +
+                    "  \"receiver\": [ID DO BENEFICIADO],\n" +
+                    "  \"amount\": [VALOR VÁLIDO]\n" +
+                    "}"
+        } else if (ex.objectName == "accountType") {
+            messageResponse = "Favor preencher o campo AccountType com COMMON ou VENDOR"
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(messageResponse)
     }
 
     @ExceptionHandler(HttpMessageNotReadableException::class)
